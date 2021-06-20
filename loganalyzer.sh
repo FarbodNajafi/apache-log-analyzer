@@ -2,7 +2,6 @@
 clear 
 
 log_file=$1
-# domain=$2
 
 echo Analyzing log file: "$log_file"
 
@@ -14,9 +13,9 @@ function top_10_ips {
 #2. Top 10 referrers:
 
 function top_10_refs {
-    echo Total visit of $domain : 
-    cat $log_file | egrep $domain | awk -F\" '{ print $4 }'| grep -v '-'| wc -l;
-    cat $log_file | egrep $domain | awk -F\" '{ print $4 }'| grep -v '-'| sort | uniq -c | sort -nr | head -n 10;
+    echo Total visit of $url : 
+    cat $log_file | egrep $url | awk -F\" '{ print $4 }'| grep -v '-'| wc -l;
+    cat $log_file | egrep $url | awk -F\" '{ print $4 }'| grep -v '-'| sort | uniq -c | sort -nr | head -n 10;
 }
 
 
@@ -72,7 +71,7 @@ do
     case $choice in
 
         1)top_10_ips;;
-        2)echo Enter domain to search:;read domain; top_10_refs;;
+        2)echo Enter url to search:;read url; top_10_refs;;
         3)top_user_agent;;
         4)reqs_per_day;;
         5)total_uniq_visitors;;
